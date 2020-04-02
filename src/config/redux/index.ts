@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from './reducers';
 
+export type AppState = ReturnType<typeof rootReducer>;
 
 export function configureStore(preloadedState?: any) {
   const sagaMiddleware = createSagaMiddleware();

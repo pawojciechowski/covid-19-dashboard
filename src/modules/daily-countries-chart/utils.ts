@@ -1,32 +1,19 @@
 import { Serie } from '@nivo/line';
-import { RegionsData, ActiveRegion } from './entities';
-import { colors } from 'modules/themes/colors';
+import { RegionsData, ActiveRegion, DataType } from './types';
 
-export function mapRegionsData(data: RegionsData, activeRegions: ActiveRegion[]): Serie[] {
+export function mapRegionsData(data: RegionsData, activeRegions: ActiveRegion[], dataType: DataType): Serie[] {
   return Object.keys(data).filter((region) => activeRegions.find((ar) => ar.region === region)).map((region) => ({
     id: region,
     data: data[region].map((entry) => ({
       x: entry.date,
-      y: entry.total
+      y: entry[dataType]
     }))
   }));
 }
 
 export function mapRegionsToOptions(regions: string[])  {
-  const colorGenerator = createColorGenerator();
-
   return regions.map((region) => ({
     label: region,
-    value: region,
-    color: colorGenerator.next().value as string
-  }));
-}
-
-function* createColorGenerator() {
-  let i = 0;
-
-  while(true) {
-    yield colors[i];
-    i = (i + 1) % colors.length;
-  }
+    value: region
+  })).sort((r1, r2) => r1.label > r2.label ? 1 : -1);
 }
