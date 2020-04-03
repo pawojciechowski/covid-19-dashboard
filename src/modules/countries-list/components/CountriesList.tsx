@@ -11,18 +11,21 @@ interface CountriesListProps {
 
 const CountriesListContainer = styled.div`
   height: 100%;
+  min-height: 300px;
+  max-width: 100%;
 
   & > div > div {
     scrollbar-width: thin;
   }
 
-  .ReactVirtualized__Table__row {
+  .ReactVirtualized__Table__row,
+  .ReactVirtualized__Table__headerRow {
     display: flex;
     align-items: center;
+  }
 
-    &:nth-child(even) {
-      background: ${({ theme }: { theme: Theme}) => theme.evenListElementBackground};
-    }
+  .ReactVirtualized__Table__row:nth-child(even) {
+    background: ${({ theme }: { theme: Theme}) => theme.evenListElementBackground};
   }
 `;
 
@@ -41,8 +44,7 @@ export function CountriesList({ data }: CountriesListProps) {
       <AutoSizer>
         {({width, height}) => (
           <Table
-            disableHeader={true}
-            headerHeight={40}
+            headerHeight={60}
             width={width}
             height={height}
             rowHeight={60}
@@ -52,16 +54,19 @@ export function CountriesList({ data }: CountriesListProps) {
                 dataKey="total"
                 width={80}
                 style={{color: '#f22', fontWeight: 'bold'}}
+                label="Cases"
               />
               <Column
                 dataKey="deaths"
-                width={60}
+                width={80}
                 style={{color: '#d83', fontWeight: 'bold'}}
+                label="Deaths"
               />
               <Column
                 dataKey="region"
                 width={0}
                 flexGrow={1}
+                label="Region"
               />
           </Table>
         )}

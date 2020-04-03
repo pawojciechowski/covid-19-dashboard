@@ -14,7 +14,11 @@ import { radioSelectOptions } from '../const';
 import RadioSelect from 'common/radio-select/components/RadioSelect';
 
 const ChartWrapper = styled.div`
-  height: 500px;
+  height: 350px;
+
+  @media screen and (min-width: 500px) {
+    height: 500px;
+  }
 `;
 
 const ChartContainer = styled.div``;

@@ -53,7 +53,6 @@ const SwitchWrapper = styled.div`
   display: flex;
   align-items: center;
   min-height: 1.5rem;
-  padding-left: 2.25rem;
   user-select: none;
 `;
 

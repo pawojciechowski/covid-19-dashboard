@@ -1,4 +1,4 @@
-import { themes } from "./const";
+import { themes } from "./themes";
 import { ThemeAction, ThemeState, ThemeName } from "./types";
 import { AppState } from "config/redux";
 

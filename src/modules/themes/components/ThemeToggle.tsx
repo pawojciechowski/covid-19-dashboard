@@ -5,7 +5,11 @@ import { themeNameSelector, setTheme, themeSelector } from '../redux';
 import styled from 'styled-components';
 
 const ThemeToggleContainer = styled.div`
-  width: 130px;
+  margin-left: 30px;
+
+  @media screen and (min-width: 500px) {
+    padding-right: 50px;
+  }
 `;
 
 export function ThemeToggle() {

@@ -1,4 +1,4 @@
-import { themeNames } from './const';
+import { themeNames } from './themes';
 import { Theme as NivoTheme } from '@nivo/core';
 
 export interface Theme {
@@ -9,6 +9,7 @@ export interface Theme {
   titleGradient: string,
   evenListElementBackground: string,
   danger: string,
+  warn: string,
   logoUrl: string,
   buttonBackground: string,
   buttonTextColor: string,

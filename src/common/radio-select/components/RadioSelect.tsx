@@ -11,10 +11,15 @@ const RadioSelectWrapper = styled.div`
   display: flex;
 `;
 const RadioSelectOptionWrapper = styled.div`
+  cursor: pointer;
+  user-select: none;
   margin-right: 10px;
 `;
-const Input = styled.input``;
+const Input = styled.input`
+  cursor: inherit;
+`;
 const Label = styled.label`
+  cursor: inherit;
   ${(props: LabelProps) => ''}
 `;
 

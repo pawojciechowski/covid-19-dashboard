@@ -15,8 +15,17 @@ const HeaderContainer = styled(Container)`
 
 const LogoLink = styled.a`
   display: block;
-  width: 130px;
-  margin-right: 50px;
+  width: 90px;
+  margin-right: 30px;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  @media screen and (min-width: 500px) {
+    width: 130px;
+    margin-right: 20px;
+  }
 `;
 
 export function Header() {

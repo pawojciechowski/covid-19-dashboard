@@ -11,14 +11,12 @@
 [x] Make sorted list of all regions with cases
 [x] Style buttons and add simple styling
 [x] Add LW branding
-[] Prepare overall count widget
+[x] Prepare overall count widget
 [] Add chart placeholder when no data chosen
 [] Connect to API
 [] Add persistent light/dark mode state in localStorage
-[] Add interactivity between list of countries & chart
 [] Add linting & lint whole project
-[] Add bar chart with total & deaths
-[] Add transitions to theme change
-[] Replace react-select with custom simpler select
 [] Write tests
+[] Add bar chart with total & deaths
+[] Replace react-select with custom simpler select
 [] Add date filtering

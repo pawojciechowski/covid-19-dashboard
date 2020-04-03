@@ -7,3 +7,13 @@ export function getRegionSummedData(data: RegionsData, region: string) {
     deaths: lastDayValue.deaths
   };
 }
+
+export function getGlobalStatistics(data: RegionsData) {
+  return Object.keys(data).reduce((acc, region) => {
+    const regionData = getRegionSummedData(data, region);
+    return {
+      total: acc.total + regionData.total,
+      deaths: acc.deaths + regionData.deaths
+    }
+  }, { total: 0, deaths: 0 });
+}
