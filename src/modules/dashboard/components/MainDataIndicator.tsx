@@ -49,8 +49,7 @@ const NumberIndicator = styled.p`
   @media screen and (min-width: 450px) {
     width: auto;
     margin-bottom: 0;
-    padding: 30px 50px;
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 `;
 
