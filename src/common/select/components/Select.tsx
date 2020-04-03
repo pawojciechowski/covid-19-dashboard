@@ -30,10 +30,10 @@ const Select = function({ styles, ...rest }: Props) {
         color: theme.fg
       };
     },
-    option: styles => {
+    option: (styles, state) => {
       return {
         ...styles,
-        background: 'none',
+        background: state.isFocused ? lighten(0.1, theme.inputBackground) : 'none',
         ':hover': {
           background: theme.inputBackground !== 'none' ? lighten(0.1, theme.inputBackground) : theme.inputBackground
         }

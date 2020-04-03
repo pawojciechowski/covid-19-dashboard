@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import { RegionsData, ActiveRegion, DataType } from '../types';
-import { SelectOption, SelectValue } from "modules/common/select/types";
-import { mapRegionsData, mapRegionsToOptions } from '../utils';
+import { ActiveRegion } from '../types';
+import { RegionsData, DataType } from "modules/api/regions/types";
+import { SelectOption, SelectValue } from "common/select/types";
+import { mapRegionsData, mapRegionsToOptions, prepareActiveRegions, getRegionSelectStyles } from '../utils';
 import CustomTooltip from './CustomTooltip';
 import styled, { ThemeContext } from 'styled-components';
-import Select from 'modules/common/select/components/Select';
-import { StylesConfig } from 'react-select';
+import Select from 'common/select/components/Select';
 import { Theme } from 'modules/themes/types';
+import { getRegionSummedData } from 'modules/api/regions/utils';
+import Button from 'common/button/components/Button';
+import { radioSelectOptions } from '../const';
+import RadioSelect from 'common/radio-select/components/RadioSelect';
 
 const ChartWrapper = styled.div`
   height: 500px;
@@ -17,23 +21,11 @@ const ChartContainer = styled.div``;
 
 const ChartFilters = styled.div``;
 
-const getRegionSelectStyles = (activeRegions: ActiveRegion[]) => ({
-  multiValue: (styles, state) => {
-    const activeRegion = activeRegions.find((ar) => ar.region === state.data.value);
-    return {
-      ...styles,
-      backgroundColor: activeRegion ? activeRegion.color : 'black'
-    };
-  }
-} as StylesConfig);
-
-
-const prepareActiveRegions = (regions: string[], theme: Theme, startColorIndex: number = 0) => {
-  return regions.map((r, i) => ({
-    region: r,
-    color: theme.chart.colors[(startColorIndex + i + 1) % theme.chart.colors.length]
-  }))
-}
+const ButtonsContainer = styled.div`
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+`;
 
 const handleSelectRegion = (
   value: SelectValue[],
@@ -82,7 +74,7 @@ export function DailyCountriesChart({ data }: DailyCountriesChartProps) {
   useEffect(() => {
     const x = Object.keys(data).sort(
       (r1, r2) => {
-        return [...data[r1]].sort((d1, d2) => new Date(d1.date) > new Date(d2.date) ? -1 : 1)[0][dataType] > [...data[r2]].sort((d1, d2) => new Date(d1.date) > new Date(d2.date) ? -1 : 1)[0][dataType] ? -1 : 1
+        return getRegionSummedData(data, r1)[dataType] > getRegionSummedData(data, r2)[dataType] ? -1 : 1
       }
     ).slice(0, 3);
     setActiveRegions(prepareActiveRegions(x, theme))
@@ -90,11 +82,11 @@ export function DailyCountriesChart({ data }: DailyCountriesChartProps) {
 
   return (
     <ChartContainer>
+      <RadioSelect name="dataType" options={radioSelectOptions} value={dataType} onChange={(value) => setDataType(value)} />
       <ChartWrapper>
-        <button onClick={() => setDataType(dataType === 'deaths' ? 'total' : 'deaths')}>Toggle data type</button>
         <ResponsiveLine
             data={mapRegionsData(data, activeRegions, dataType)}
-            margin={{ top: 30, right: 20, bottom: 85, left: 65 }}
+            margin={{ top: 30, right: 40, bottom: 85, left: 65 }}
             xScale={{ type: 'point' }}
             yScale={{ type: 'linear', min: 0, max: 'auto', reverse: false }}
             curve="monotoneX"
@@ -131,6 +123,10 @@ export function DailyCountriesChart({ data }: DailyCountriesChartProps) {
         />
       </ChartWrapper>
       <ChartFilters>
+        <ButtonsContainer>
+          <Button onClick={() => handleSelectRegion(regionsOptions as SelectValue[], activeRegions, setActiveRegions, theme)}>Select all</Button>
+          <Button onClick={() => setActiveRegions([])}>Clear all</Button>
+        </ButtonsContainer>
         <Select
           options={regionsOptions}
           value={activeRegions.map((ar) => ({
@@ -141,8 +137,6 @@ export function DailyCountriesChart({ data }: DailyCountriesChartProps) {
           // Casting due to ReactSelect wrong types
           onChange={(value) => handleSelectRegion(value as SelectValue[], activeRegions, setActiveRegions, theme)}
           isMulti />
-        <button onClick={() => handleSelectRegion(regionsOptions as SelectValue[], activeRegions, setActiveRegions, theme)}>Select all</button>
-        <button onClick={() => setActiveRegions([])}>Clear all</button>
       </ChartFilters>
     </ChartContainer>
   )

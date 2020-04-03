@@ -7,11 +7,11 @@
 [x] Add feature to select/deselect all regions
 [x] Make 3 regions with highest data value default series on chart
 [x] Set proper themes values
-[] Add highlighting for options focused by keyboard
-[] Make sorted list of all regions with cases
+[x] Add highlighting for options focused by keyboard
+[x] Make sorted list of all regions with cases
+[x] Style buttons and add simple styling
+[x] Add LW branding
 [] Prepare overall count widget
-[] Style buttons and add simple styling
-[] Add LW branding
 [] Add chart placeholder when no data chosen
 [] Connect to API
 [] Add persistent light/dark mode state in localStorage
@@ -21,3 +21,4 @@
 [] Add transitions to theme change
 [] Replace react-select with custom simpler select
 [] Write tests
+[] Add date filtering

@@ -3,14 +3,16 @@ import { Provider } from 'react-redux';
 import { configureStore } from 'config/redux';
 import Dashboard from 'modules/dashboard/components/Dashboard';
 import ThemeProvider from 'modules/themes/components/ThemeProvider';
-import ThemeToggle from 'modules/themes/components/ThemeToggle';
+import Header from './Header';
+import Footer from './Footer';
 
 function App() {
   return (
     <Provider store={configureStore()}>
       <ThemeProvider>
-        <ThemeToggle />
+        <Header />
         <Dashboard />
+        <Footer />
       </ThemeProvider>
     </Provider>
   );

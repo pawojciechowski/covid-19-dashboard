@@ -5,6 +5,13 @@ export interface Theme {
   fg: string,
   bg: string,
   inputBackground: string,
+  titleColor: string,
+  titleGradient: string,
+  evenListElementBackground: string,
+  danger: string,
+  logoUrl: string,
+  buttonBackground: string,
+  buttonTextColor: string,
   chart: NivoTheme & { colors: string[]}
 };
 

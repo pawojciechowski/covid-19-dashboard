@@ -1,14 +1,11 @@
 import React from 'react';
-import Switch from 'modules/common/switch/components/Switch';
+import Switch from 'common/switch/components/Switch';
 import { useSelector, useDispatch } from 'react-redux';
 import { themeNameSelector, setTheme, themeSelector } from '../redux';
 import styled from 'styled-components';
 
 const ThemeToggleContainer = styled.div`
-  position: fixed;
-  top: 10px;
-  right: 20px;
-  z-index: 1;
+  width: 130px;
 `;
 
 export function ThemeToggle() {
@@ -19,7 +16,7 @@ export function ThemeToggle() {
 
   return (
     <ThemeToggleContainer>
-      <Switch name={'themeToggle'} value={themeName === 'light'} onChange={handleToggle} activeColor={theme.fg} inactiveColor={theme.fg} />
+      <Switch name={'themeToggle'} value={themeName === 'light'} onChange={handleToggle} activeColor={theme.fg} inactiveColor={theme.fg} size={15} />
     </ThemeToggleContainer>
   )
 }

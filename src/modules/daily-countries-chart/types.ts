@@ -1,18 +1,11 @@
-import { dataTypes } from './const';
+import { DataType } from "modules/api/regions/types";
 
-export interface RegionData {
-  date: string,
-  total: number,
-  deaths: number
-}
-
-export interface RegionsData {
-  [region: string]: RegionData[]
+export type DataTypeRadioSelectOption = {
+  label: string,
+  value: DataType
 }
 
 export interface ActiveRegion {
   region: string,
   color: string
 }
-
-export type DataType = typeof dataTypes[number];

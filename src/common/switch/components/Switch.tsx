@@ -6,6 +6,7 @@ interface LabelProps {
   value?: boolean,
   activeColor?: string,
   inactiveColor?: string,
+  size: number,
   theme: Theme
 }
 
@@ -17,11 +18,11 @@ const Label = styled.label`
   &:before {
     content: "";
     display: block;
-    width: 26px;
-    height: 14px;
+    width: ${(props: LabelProps) => 2 * props.size + 2 + 'px'};
+    height: ${(props: LabelProps) => props.size + 2 + 'px'};
     border: ${(props: LabelProps) => props.value ? props.activeColor || props.theme.fg : props.inactiveColor || '#adb5bd'} solid 1px;
     pointer-events: all;
-    border-radius: 8px;
+    border-radius: ${(props: LabelProps) => props.size + 'px'};
     transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   }
 
@@ -31,12 +32,12 @@ const Label = styled.label`
     position: absolute;
     top: 2px;
     left: 2px;
-    width: 12px;
-    height: 12px;
+    width: ${(props: LabelProps) => props.size + 'px'};
+    height: ${(props: LabelProps) => props.size + 'px'};
     background-color: ${(props: LabelProps) => props.value ? props.activeColor || props.theme.fg : props.inactiveColor || '#adb5bd'};
-    border-radius: 6px;
+    border-radius: ${(props: LabelProps) => props.size / 2 + 'px'};
     transition: transform .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-transform .15s ease-in-out;
-    transform: ${(props: LabelProps) => props.value ? 'translateX(12px);' : undefined}
+    transform: ${(props: LabelProps) => props.value ? `translateX(${props.size}px);` : undefined}
   }
 `;
 
@@ -49,7 +50,8 @@ const Input = styled.input`
 
 const SwitchWrapper = styled.div`
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
   min-height: 1.5rem;
   padding-left: 2.25rem;
   user-select: none;
@@ -60,16 +62,17 @@ interface SwitchProps {
   value?: boolean,
   onChange?: (newValue: boolean) => void,
   activeColor?: string,
-  inactiveColor?: string
+  inactiveColor?: string,
+  size?: number
 }
 
-export function Switch({ name, value, onChange, activeColor, inactiveColor }: SwitchProps) {
+export function Switch({ name, value, onChange, activeColor, inactiveColor, size = 12 }: SwitchProps) {
   const [internalValue, setInternalValue] = useState(value || false);
   const idProp = `id_switch_${name}`;
 
   useEffect(() => {
     setInternalValue(value || false);
-  }, [value])
+  }, [value]);
 
   const handleSwitchChange = (e: any) => {
     const newValue = e.target.checked;
@@ -80,7 +83,7 @@ export function Switch({ name, value, onChange, activeColor, inactiveColor }: Sw
   return (
     <SwitchWrapper>
       <Input type="checkbox" name={name} id={idProp} checked={internalValue} onChange={handleSwitchChange} />
-      <Label activeColor={activeColor} inactiveColor={inactiveColor} value={internalValue} htmlFor={idProp} />
+      <Label size={size} activeColor={activeColor} inactiveColor={inactiveColor} value={internalValue} htmlFor={idProp} />
     </SwitchWrapper>
   )
 }
