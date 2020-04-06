@@ -5,7 +5,7 @@ import styled from 'styled-components';
 interface LabelProps {
   value: RadioSelectValue,
   size: number
-};
+}
 
 const RadioSelectWrapper = styled.div`
   display: flex;
@@ -41,8 +41,8 @@ export function RadioSelect<T extends RadioSelectValue>({ name, options, value, 
   const handleRadioSelectChange = (e: any) => {
     const newValue = e.target.value;
     setInternalValue(newValue);
-    onChange && onChange(newValue)
-  }
+    onChange && onChange(newValue);
+  };
 
   return (
     <RadioSelectWrapper>
@@ -56,7 +56,7 @@ export function RadioSelect<T extends RadioSelectValue>({ name, options, value, 
         );
       })}
     </RadioSelectWrapper>
-  )
+  );
 }
 
 export default RadioSelect;

@@ -14,6 +14,6 @@ export function getGlobalStatistics(data: RegionsData) {
     return {
       total: acc.total + regionData.total,
       deaths: acc.deaths + regionData.deaths
-    }
+    };
   }, { total: 0, deaths: 0 });
 }

@@ -25,7 +25,7 @@ export function prepareActiveRegions(regions: string[], theme: Theme, startColor
   return regions.map((r, i) => ({
     region: r,
     color: theme.chart.colors[(startColorIndex + i + 1) % theme.chart.colors.length]
-  }))
+  }));
 }
 
 export const getRegionSelectStyles = (activeRegions: ActiveRegion[]) => ({

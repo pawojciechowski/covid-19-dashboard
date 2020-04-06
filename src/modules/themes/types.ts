@@ -14,7 +14,7 @@ export interface Theme {
   buttonBackground: string,
   buttonTextColor: string,
   chart: NivoTheme & { colors: string[]}
-};
+}
 
 export type ThemeName = typeof themeNames[number];
 

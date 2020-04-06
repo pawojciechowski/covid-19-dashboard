@@ -44,4 +44,4 @@ export default {
   grey100,
   grey50,
   red100,
-}
+};

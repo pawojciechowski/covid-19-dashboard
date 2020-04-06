@@ -14,5 +14,5 @@ export function configureStore(preloadedState?: any) {
 
   // sagaMiddleware.run()
 
-  return store
+  return store;
 }

@@ -96,5 +96,5 @@ export const themes: {[key in ThemeName]: Theme} = {
       ]
     }
   }
-}
+};
 

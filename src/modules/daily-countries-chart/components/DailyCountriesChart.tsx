@@ -49,7 +49,7 @@ const handleSelectRegion = (
       if (activeRegion) {
         filteredRegions.push(activeRegion);
       } else {
-        regionsToAdd.push(v.value)
+        regionsToAdd.push(v.value);
       }
     });
 
@@ -59,7 +59,7 @@ const handleSelectRegion = (
   }
 
   setActiveRegions(newActiveRegions);
-}
+};
 
 interface DailyCountriesChartProps {
   data: RegionsData
@@ -67,7 +67,7 @@ interface DailyCountriesChartProps {
 
 export function DailyCountriesChart({ data }: DailyCountriesChartProps) {
   const theme = useContext<Theme>(ThemeContext);
-  const [dataType, setDataType] = useState('total' as DataType)
+  const [dataType, setDataType] = useState('total' as DataType);
   const [activeRegions, setActiveRegions] = useState([] as ActiveRegion[]);
   const [regionsOptions, setRegionsOptions] = useState([] as SelectOption[]);
 
@@ -78,11 +78,11 @@ export function DailyCountriesChart({ data }: DailyCountriesChartProps) {
   useEffect(() => {
     const x = Object.keys(data).sort(
       (r1, r2) => {
-        return getRegionSummedData(data, r1)[dataType] > getRegionSummedData(data, r2)[dataType] ? -1 : 1
+        return getRegionSummedData(data, r1)[dataType] > getRegionSummedData(data, r2)[dataType] ? -1 : 1;
       }
     ).slice(0, 3);
-    setActiveRegions(prepareActiveRegions(x, theme))
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    setActiveRegions(prepareActiveRegions(x, theme));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <ChartContainer>
@@ -143,7 +143,7 @@ export function DailyCountriesChart({ data }: DailyCountriesChartProps) {
           isMulti />
       </ChartFilters>
     </ChartContainer>
-  )
+  );
 }
 
 export default DailyCountriesChart;

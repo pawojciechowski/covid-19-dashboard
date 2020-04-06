@@ -76,15 +76,15 @@ export function Switch({ name, value, onChange, activeColor, inactiveColor, size
   const handleSwitchChange = (e: any) => {
     const newValue = e.target.checked;
     setInternalValue(newValue);
-    onChange && onChange(newValue)
-  }
+    onChange && onChange(newValue);
+  };
 
   return (
     <SwitchWrapper>
       <Input type="checkbox" name={name} id={idProp} checked={internalValue} onChange={handleSwitchChange} />
       <Label size={size} activeColor={activeColor} inactiveColor={inactiveColor} value={internalValue} htmlFor={idProp} />
     </SwitchWrapper>
-  )
+  );
 }
 
 

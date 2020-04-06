@@ -21,12 +21,12 @@ export const themeReducer = (state = initialState, action: ThemeAction): ThemeSt
         ...state,
         name: action.theme,
         current: themes[action.theme]
-      }
+      };
     }
     default:
       return state;
   }
-}
+};
 
 export const themeSelector = (state: AppState) => state.theme.current;
 export const themeNameSelector = (state: AppState) => state.theme.name;

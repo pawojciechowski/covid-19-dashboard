@@ -22,7 +22,7 @@ export function ThemeToggle() {
     <ThemeToggleContainer>
       <Switch name={'themeToggle'} value={themeName === 'light'} onChange={handleToggle} activeColor={theme.fg} inactiveColor={theme.fg} size={15} />
     </ThemeToggleContainer>
-  )
+  );
 }
 
 export default ThemeToggle;

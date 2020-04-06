@@ -76,7 +76,7 @@ export function ThemeProvider({ children }: PropsWithChildren<{}>) {
       <GlobalStyle theme={theme} />
       {children}
     </StyledComponentsThemeProvider>
-  )
+  );
 }
 
 export default ThemeProvider;

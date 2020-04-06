@@ -12,11 +12,14 @@
 - [x] Style buttons and add simple styling
 - [x] Add LW branding
 - [x] Prepare overall count widget
-- [ ] Add chart placeholder when no data chosen
-- [ ] Connect to API
-- [ ] Add persistent light/dark mode state in localStorage
-- [ ] Add linting & lint whole project
+- [x] Add CI & CD
+- [x] Add linting & lint whole project
 - [ ] Write tests
+- [ ] Connect to API
+- [ ] Add chart placeholder when no data chosen
+- [ ] Add persistent light/dark mode state in localStorage
 - [ ] Add bar chart with total & deaths
+- [ ] Different sources of data
+- [ ] Summed up data in the charts
 - [ ] Replace react-select with custom simpler select
 - [ ] Add date filtering

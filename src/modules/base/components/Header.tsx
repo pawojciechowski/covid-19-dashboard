@@ -39,7 +39,7 @@ export function Header() {
       <Title>COVID-19 Dashboard</Title>
       <ThemeToggle />
     </HeaderContainer>
-  )
+  );
 }
 
 export default Header;

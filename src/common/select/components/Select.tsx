@@ -37,9 +37,9 @@ const Select = function({ styles, ...rest }: Props) {
         ':hover': {
           background: theme.inputBackground !== 'none' ? lighten(0.1, theme.inputBackground) : theme.inputBackground
         }
-      }
+      };
     }
-  } as StylesConfig), [theme])
+  } as StylesConfig), [theme]);
 
   return (
     <ReactSelect

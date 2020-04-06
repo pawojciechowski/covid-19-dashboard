@@ -73,7 +73,7 @@ export function MainDataIndicator({ total, deaths }: MainDataIndicatorProps) {
         <WarningNumberIndicator>{deaths}</WarningNumberIndicator>
       </DataIndicator>
     </MainDataIndicatorContainer>
-  )
+  );
 }
 
 export default MainDataIndicator;

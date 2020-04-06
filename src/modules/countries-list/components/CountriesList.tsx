@@ -7,7 +7,7 @@ import { Theme } from 'modules/themes/types';
 
 interface CountriesListProps {
   data: RegionsData
-};
+}
 
 const CountriesListContainer = styled.div`
   height: 100%;
@@ -72,7 +72,7 @@ export function CountriesList({ data }: CountriesListProps) {
         )}
       </AutoSizer>
     </CountriesListContainer>
-  )
+  );
 }
 
 export default CountriesList;

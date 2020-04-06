@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import DailyCountriesChart from 'modules/daily-countries-chart/components/DailyCountriesChart';
 
 import data from 'data/series.json';
@@ -58,7 +58,7 @@ export function Dashboard() {
         <CountriesList data={data} />
       </LeftColumn>
     </DashboardContainer>
-  )
+  );
 }
 
 export default Dashboard;
