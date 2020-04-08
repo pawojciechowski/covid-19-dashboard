@@ -1,6 +1,6 @@
-import { themes } from "./themes";
-import { ThemeAction, ThemeState, ThemeName } from "./types";
-import { AppState } from "config/redux";
+import { themes } from './themes';
+import { ThemeAction, ThemeState, ThemeName } from './types';
+import { AppState } from 'config/redux';
 
 export function setTheme(theme: ThemeName): ThemeAction {
   return {

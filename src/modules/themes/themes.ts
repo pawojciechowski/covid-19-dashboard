@@ -1,4 +1,4 @@
-import { Theme, ThemeName } from "./types";
+import { Theme, ThemeName } from './types';
 import logoDark from 'assets/icons/logo.svg';
 import logoLight from 'assets/icons/logo-light.svg';
 import colors from './colors';

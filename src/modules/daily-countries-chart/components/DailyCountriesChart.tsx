@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 import { ActiveRegion } from '../types';
-import { RegionsData, DataType } from "modules/api/regions/types";
-import { SelectOption, SelectValue } from "common/select/types";
+import { RegionsData, DataType } from 'modules/api/regions/types';
+import { SelectOption, SelectValue } from 'common/select/types';
 import { mapRegionsData, mapRegionsToOptions, prepareActiveRegions, getRegionSelectStyles } from '../utils';
 import CustomTooltip from './CustomTooltip';
 import styled, { ThemeContext } from 'styled-components';

@@ -1,8 +1,8 @@
-import { Serie } from "@nivo/line";
-import { ActiveRegion } from "./types";
-import { RegionsData, DataType } from "modules/api/regions/types";
-import { Theme } from "modules/themes/types";
-import { StylesConfig } from "react-select";
+import { Serie } from '@nivo/line';
+import { ActiveRegion } from './types';
+import { RegionsData, DataType } from 'modules/api/regions/types';
+import { Theme } from 'modules/themes/types';
+import { StylesConfig } from 'react-select';
 
 export function mapRegionsData(data: RegionsData, activeRegions: ActiveRegion[], dataType: DataType): Serie[] {
   return Object.keys(data).filter((region) => activeRegions.find((ar) => ar.region === region)).map((region) => ({

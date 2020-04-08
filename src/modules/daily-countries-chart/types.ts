@@ -1,4 +1,4 @@
-import { DataType } from "modules/api/regions/types";
+import { DataType } from 'modules/api/regions/types';
 
 export type DataTypeRadioSelectOption = {
   label: string,
