@@ -73,7 +73,7 @@ export function ThemeProvider({ children }: PropsWithChildren<{}>) {
 
   return (
     <StyledComponentsThemeProvider theme={theme}>
-      <GlobalStyle theme={theme} />
+      <GlobalStyle />
       {children}
     </StyledComponentsThemeProvider>
   );
