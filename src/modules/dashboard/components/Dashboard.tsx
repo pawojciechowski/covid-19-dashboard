@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DailyCountriesChart from 'modules/daily-countries-chart/components/DailyCountriesChart';
 
-import data from 'data/series.json';
 import CountriesList from 'modules/countries-list/components/CountriesList';
 import styled from 'styled-components';
 import Container from 'modules/themes/components/Container';
@@ -9,6 +8,7 @@ import { headerHeight } from 'modules/base/components/Header';
 import { footerHeight } from 'modules/base/components/Footer';
 import MainDataIndicator from './MainDataIndicator';
 import { getGlobalStatistics } from 'modules/api/regions/utils';
+import { RegionsData } from 'modules/api/regions/types';
 
 const DashboardContainer = styled(Container)`
   display: flex;
@@ -46,16 +46,28 @@ const RightColumn = styled(Column)`
 `;
 
 export function Dashboard() {
-  const { total, deaths } = getGlobalStatistics(data);
+  const [data, setData] = useState(null as RegionsData | null);
+
+  useEffect(() => {
+    fetch('/series.json').then((res) => {
+      if (res.ok) {
+        res.json().then((responseData) => {
+          setData(responseData);
+        }).catch((err) => console.error(err));
+      } else {
+        console.error(`Response failed with status ${res.status}`);
+      }
+    });
+  }, [setData]);
 
   return (
     <DashboardContainer>
       <RightColumn>
-        <MainDataIndicator total={total} deaths={deaths} />
-        <DailyCountriesChart data={data} />
+        {data && <MainDataIndicator {...getGlobalStatistics(data)} />}
+        {data && <DailyCountriesChart data={data} />}
       </RightColumn>
       <LeftColumn>
-        <CountriesList data={data} />
+        {data && <CountriesList data={data} />}
       </LeftColumn>
     </DashboardContainer>
   );
