@@ -7,10 +7,10 @@ interface LabelProps {
   size: number
 }
 
-const RadioSelectWrapper = styled.div`
+export const RadioSelectWrapper = styled.div`
   display: flex;
 `;
-const RadioSelectOptionWrapper = styled.div`
+export const RadioSelectOptionWrapper = styled.div`
   cursor: pointer;
   user-select: none;
   margin-right: 10px;

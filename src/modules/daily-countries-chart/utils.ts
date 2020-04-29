@@ -1,16 +1,16 @@
 import { Serie } from '@nivo/line';
-import { ActiveRegion } from './types';
+import { ActiveRegion, Scale } from './types';
 import { RegionsData, DataType } from 'modules/api/regions/types';
 import { Theme } from 'modules/themes/types';
 import { StylesConfig } from 'react-select';
 
-export function mapRegionsData(data: RegionsData, activeRegions: ActiveRegion[], dataType: DataType): Serie[] {
+export function mapRegionsData(data: RegionsData, activeRegions: ActiveRegion[], dataType: DataType, scale: Scale): Serie[] {
   return Object.keys(data).filter((region) => activeRegions.find((ar) => ar.region === region)).map((region) => ({
     id: region,
     data: data[region].map((entry) => ({
       x: entry.date,
       y: entry[dataType]
-    }))
+    })).filter((entry) => scale === 'log' ? entry.y > 0 : true)
   }));
 }
 

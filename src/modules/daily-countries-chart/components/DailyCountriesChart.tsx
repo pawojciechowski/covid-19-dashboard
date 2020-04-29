@@ -11,7 +11,7 @@ import { Theme } from 'modules/themes/types';
 import { getRegionSummedData } from 'modules/api/regions/utils';
 import Button from 'common/button/components/Button';
 import { dataTypeOptions, scaleOptions, scaleConfig, logAxisConfig, linearAxisConfig, logGridValues } from '../const';
-import RadioSelect from 'common/radio-select/components/RadioSelect';
+import RadioSelect, { RadioSelectOptionWrapper, RadioSelectWrapper } from 'common/radio-select/components/RadioSelect';
 
 const ChartWrapper = styled.div`
   height: 350px;
@@ -34,6 +34,24 @@ const ButtonsContainer = styled.div`
 const ChartControlsContainer = styled.div`
   display: flex;
   justify-content: space-between;
+
+  ${RadioSelectWrapper} {
+    flex-direction: column;
+  }
+
+  ${RadioSelectOptionWrapper} {
+    margin-bottom: 10px;
+  }
+
+  @media screen and (min-width: 500px) {
+    ${RadioSelectWrapper} {
+      flex-direction: row;
+    }
+
+    ${RadioSelectOptionWrapper} {
+      margin-bottom: 0;
+    }
+  }
 `;
 
 const handleSelectRegion = (
@@ -82,6 +100,10 @@ export function DailyCountriesChart({ data }: DailyCountriesChartProps) {
     return scale === 'log' ? {...logAxisConfig, legend} : {...linearAxisConfig, legend};
   }, [scale, dataType]);
 
+  const chartData = useMemo(() => {
+    return mapRegionsData(data, activeRegions, dataType, scale);
+  }, [data, activeRegions, dataType, scale]);
+
   useEffect(() => {
     setRegionsOptions(mapRegionsToOptions(Object.keys(data)));
   }, [data]);
@@ -103,8 +125,8 @@ export function DailyCountriesChart({ data }: DailyCountriesChartProps) {
       </ChartControlsContainer>
       <ChartWrapper>
         <ResponsiveLine
-            data={mapRegionsData(data, activeRegions, dataType)}
-            margin={{ top: 30, right: 40, bottom: 85, left: 65 }}
+            data={chartData}
+            margin={{ top: 30, right: 40, bottom: 85, left: 70 }}
             xScale={{ type: 'time', format: '%Y-%m-%d', precision: 'day' }}
             yScale={scaleConfig[scale]}
             xFormat="time:%Y-%m-%d"
@@ -117,6 +139,7 @@ export function DailyCountriesChart({ data }: DailyCountriesChartProps) {
                 format: '%b %d',
                 tickSize: 5,
                 tickPadding: 5,
+                tickRotation: -45
             }}
             axisLeft={axisLeftConfig}
             colors={(data) => {

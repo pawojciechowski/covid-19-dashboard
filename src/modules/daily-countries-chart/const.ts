@@ -28,7 +28,7 @@ const baseAxisConfig = {
   tickSize: 5,
   tickPadding: 5,
   tickRotation: 0,
-  legendOffset: -60,
+  legendOffset: -65,
   legendPosition: 'middle',
   format: (v: number) => v.toLocaleString()
 };
