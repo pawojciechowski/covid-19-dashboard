@@ -80,7 +80,7 @@ export function DailyCountriesChart({ data }: DailyCountriesChartProps) {
   const axisLeftConfig = useMemo(() => {
     const legend = `Number of ${dataType === 'deaths' ? 'deaths' : 'cases'}`;
     return scale === 'log' ? {...logAxisConfig, legend} : {...linearAxisConfig, legend};
-  }, [scale, dataType])
+  }, [scale, dataType]);
 
   useEffect(() => {
     setRegionsOptions(mapRegionsToOptions(Object.keys(data)));
