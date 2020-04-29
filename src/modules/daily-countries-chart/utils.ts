@@ -28,12 +28,14 @@ export function prepareActiveRegions(regions: string[], theme: Theme, startColor
   }));
 }
 
-export const getRegionSelectStyles = (activeRegions: ActiveRegion[]) => ({
-  multiValue: (styles, state) => {
-    const activeRegion = activeRegions.find((ar) => ar.region === state.data.value);
-    return {
-      ...styles,
-      backgroundColor: activeRegion ? activeRegion.color : 'black'
-    };
-  }
-} as StylesConfig);
+export function getRegionSelectStyles(activeRegions: ActiveRegion[]) {
+  return {
+    multiValue: (styles, state) => {
+      const activeRegion = activeRegions.find((ar) => ar.region === state.data.value);
+      return {
+        ...styles,
+        backgroundColor: activeRegion ? activeRegion.color : 'black'
+      };
+    }
+  } as StylesConfig;
+}

@@ -49,7 +49,7 @@ export function Dashboard() {
   const [data, setData] = useState(null as RegionsData | null);
 
   useEffect(() => {
-    fetch('/series.json').then((res) => {
+    fetch('https://covid19.pawojciechowski.ovh/series.json').then((res) => {
       if (res.ok) {
         res.json().then((responseData) => {
           setData(responseData);

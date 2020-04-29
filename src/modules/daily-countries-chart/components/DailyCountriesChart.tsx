@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useMemo } from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import { ActiveRegion } from '../types';
+import { ActiveRegion, Scale } from '../types';
 import { RegionsData, DataType } from 'modules/api/regions/types';
 import { SelectOption, SelectValue } from 'common/select/types';
 import { mapRegionsData, mapRegionsToOptions, prepareActiveRegions, getRegionSelectStyles } from '../utils';
@@ -10,7 +10,7 @@ import Select from 'common/select/components/Select';
 import { Theme } from 'modules/themes/types';
 import { getRegionSummedData } from 'modules/api/regions/utils';
 import Button from 'common/button/components/Button';
-import { radioSelectOptions } from '../const';
+import { dataTypeOptions, scaleOptions, scaleConfig, logAxisConfig, linearAxisConfig, logGridValues } from '../const';
 import RadioSelect from 'common/radio-select/components/RadioSelect';
 
 const ChartWrapper = styled.div`
@@ -27,6 +27,11 @@ const ChartFilters = styled.div``;
 
 const ButtonsContainer = styled.div`
   margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ChartControlsContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
@@ -68,8 +73,14 @@ interface DailyCountriesChartProps {
 export function DailyCountriesChart({ data }: DailyCountriesChartProps) {
   const theme = useContext<Theme>(ThemeContext);
   const [dataType, setDataType] = useState('total' as DataType);
+  const [scale, setScale] = useState('linear' as Scale);
   const [activeRegions, setActiveRegions] = useState([] as ActiveRegion[]);
   const [regionsOptions, setRegionsOptions] = useState([] as SelectOption[]);
+
+  const axisLeftConfig = useMemo(() => {
+    const legend = `Number of ${dataType === 'deaths' ? 'deaths' : 'cases'}`;
+    return scale === 'log' ? {...logAxisConfig, legend} : {...linearAxisConfig, legend};
+  }, [scale, dataType])
 
   useEffect(() => {
     setRegionsOptions(mapRegionsToOptions(Object.keys(data)));
@@ -86,31 +97,28 @@ export function DailyCountriesChart({ data }: DailyCountriesChartProps) {
 
   return (
     <ChartContainer>
-      <RadioSelect name="dataType" options={radioSelectOptions} value={dataType} onChange={(value) => setDataType(value)} />
+      <ChartControlsContainer>
+        <RadioSelect name="dataType" options={dataTypeOptions} value={dataType} onChange={(value) => setDataType(value)} />
+        <RadioSelect name="scale" options={scaleOptions} value={scale} onChange={(value) => setScale(value)} />
+      </ChartControlsContainer>
       <ChartWrapper>
         <ResponsiveLine
             data={mapRegionsData(data, activeRegions, dataType)}
             margin={{ top: 30, right: 40, bottom: 85, left: 65 }}
-            xScale={{ type: 'point' }}
-            yScale={{ type: 'linear', min: 0, max: 'auto', reverse: false }}
+            xScale={{ type: 'time', format: '%Y-%m-%d', precision: 'day' }}
+            yScale={scaleConfig[scale]}
+            xFormat="time:%Y-%m-%d"
+            yFormat={(v) => v.toLocaleString()}
+            gridYValues={scale === 'log' ? logGridValues : undefined}
             curve="monotoneX"
             axisTop={null}
             axisRight={null}
             axisBottom={{
-                orient: 'bottom',
+                format: '%b %d',
                 tickSize: 5,
                 tickPadding: 5,
-                tickRotation: -60
             }}
-            axisLeft={{
-                orient: 'left',
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: `Number of ${dataType === 'deaths' ? 'deaths' : 'cases'}`,
-                legendOffset: -55,
-                legendPosition: 'middle'
-            }}
+            axisLeft={axisLeftConfig}
             colors={(data) => {
               const activeRegion = activeRegions.find((ar) => ar.region === data.id);
               return activeRegion ? activeRegion.color : theme.fg;

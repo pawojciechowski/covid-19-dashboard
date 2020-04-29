@@ -66,11 +66,11 @@ export function MainDataIndicator({ total, deaths }: MainDataIndicatorProps) {
     <MainDataIndicatorContainer>
       <DataIndicator>
         <p>Total cases</p>
-        <DangerNumberIndicator>{total}</DangerNumberIndicator>
+        <DangerNumberIndicator>{total.toLocaleString()}</DangerNumberIndicator>
       </DataIndicator>
       <DataIndicator>
         <p>Deaths</p>
-        <WarningNumberIndicator>{deaths}</WarningNumberIndicator>
+        <WarningNumberIndicator>{deaths.toLocaleString()}</WarningNumberIndicator>
       </DataIndicator>
     </MainDataIndicatorContainer>
   );
